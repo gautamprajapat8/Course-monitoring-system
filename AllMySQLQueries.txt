@@ -1,0 +1,85 @@
+create data Base
+
+ create database CourseMonitoringSystem;
+ 
+ ------------------------------------------------------------------------------------------------------------------------
+ use Databse for Project
+ 
+ use CourseMonitoringSystem;
+ 
+ 
+------------------------------------------------------------------------------------------------------------------------
+Tables:
+==========================================================================================================================
+ Create Table
+
+	Admin:
+	•	username
+	•	password
+
+
+ create table Admin(username varchar(25) primary key, password varchar(20) NOT NULL);
+ 
+ -------------------------------------------------------------------------------------------------------------------------
+ 
+	Faculty:
+	•	facultyid
+	•	facultyname
+	•	facultyaddress
+	•	mobile
+	•	email 
+	•	username
+	•	password
+
+
+create table Faculty(facultyid int primary key, facultyname varchar(20) NOT NULL, facultyaddress varchar(25) NOT NULL, mobile varchar(10) NOT NULL, email varchar(25) NOT NULL UNIQUE, username varchar(25) NOT NULL UNIQUE,password varchar(20) NOT NULL);
+ 
+ 
+ alter table Faculty auto_increment=1001;
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+	Course:
+	•	courseid
+	•	courseName
+	•	fee
+	•	courseDescription
+
+
+create table Course(courseid int primary key, courseName varchar(15) NOT NULL UNIQUE, fee int NOT NULL,courseDescription varchar(30) NOT NULL);
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
+Batch:
+•	batchId:
+•	courseId:
+•	facultyId:
+•	numberofStudents;
+•	batchstartDate
+•	duration 
+
+
+create table Batch(batchId int primary key, courseId int, facultyId int, numberofStudents int NOT NULL, batchstartDate Date NOT NULL, duration varchar(12) NOT NULL, FOREIGN KEY (courseId) REFERENCES Course(courseid), FOREIGN KEY(facultyId) REFERENCES Faculty(facultyid));
+ 
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
+
+CoursePlan:
+•	planId
+•	batchId
+•	dayNumber
+•	topic
+•	status: completed/pending
+
+
+create table CoursePlan(planId int primary key, batchId int, dayNumber int NOT NULL, topic varchar(20) NOT NULL, status varchar(10) NOT NULL, FOREIGN KEY (batchId) REFERENCES Batch(batchId));
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
