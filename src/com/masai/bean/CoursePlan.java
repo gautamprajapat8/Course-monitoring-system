@@ -1,6 +1,6 @@
 package com.masai.bean;
 
-public class CoursPlan {
+public class CoursePlan {
 
 	private int planId;
 	private int batchId;
@@ -9,12 +9,12 @@ public class CoursPlan {
 	private String status;	//completed/pending
 
 
-	public CoursPlan() {
+	public CoursePlan() {
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public CoursPlan(int planId, int batchId, int dayNumber, String topic, String status) {
+	public CoursePlan(int planId, int batchId, int dayNumber, String topic, String status) {
 		super();
 		this.planId = planId;
 		this.batchId = batchId;
