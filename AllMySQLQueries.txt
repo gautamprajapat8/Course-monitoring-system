@@ -171,3 +171,8 @@ select status from courseplan group by batchId;
 
 DELETE FROM table_name WHERE condition;
 DELETE FROM course WHERE courseid=107;
+
+
+
+
+UPDATE coursePlan SET batchId=?,dayNumber=?,topic=?,status=? where planId=?;
