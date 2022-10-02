@@ -40,7 +40,7 @@ After understanding the basic of JAVA & MySQL and JDBC, I just try to build the 
 
 
 
-					Course Monitoring System
+								Course Monitoring System
 
 #Types of users:
 •	Administrator.
