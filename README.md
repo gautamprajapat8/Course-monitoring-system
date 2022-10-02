@@ -38,17 +38,17 @@ After understanding the basic of JAVA & MySQL and JDBC, I just try to build the 
 - [Gautam Kumar](https://github.com/gautamprajapat8)
 
 
-
+## 
 
 								Course Monitoring System
 
-#Types of users:
-•	Administrator.
+# Types of users:
+•	Administrator
 
 •	Faculty
 
 
-#Role of Administrator:
+# Role of Administrator:
 •	Login to his account
 
 •	 Create, Update, View Course.
@@ -68,7 +68,7 @@ After understanding the basic of JAVA & MySQL and JDBC, I just try to build the 
 
 
 
-#Role of Faculty:
+# Role of Faculty:
 
 •	Login to his/her account
 
@@ -80,7 +80,7 @@ After understanding the basic of JAVA & MySQL and JDBC, I just try to build the 
 
 
 
-#Tables:
+								Tables:
 
 # Admin:
  
@@ -89,7 +89,7 @@ After understanding the basic of JAVA & MySQL and JDBC, I just try to build the 
 •	password:
 
 
-#Faculty:
+# Faculty:
 
 •	facultyid
 
@@ -106,7 +106,7 @@ After understanding the basic of JAVA & MySQL and JDBC, I just try to build the 
 •	password
 
 
-#Course:
+# Course:
 
 •	coursed
 
@@ -117,7 +117,7 @@ After understanding the basic of JAVA & MySQL and JDBC, I just try to build the 
 •	courseDescription
 
 
-#Batch:
+# Batch:
 
 •	batchId:
 
@@ -132,7 +132,7 @@ After understanding the basic of JAVA & MySQL and JDBC, I just try to build the 
 •	duration 
 
 
-#CoursPlan:
+# CoursPlan:
 
 •	planId
 
@@ -145,9 +145,156 @@ After understanding the basic of JAVA & MySQL and JDBC, I just try to build the 
 •	status: completed/pending
 
 
+# Some basic MySQL santax used By me in the project
+
+
+
+create data Base
+
+ create database CourseMonitoringSystem;
+ 
+ ------------------------------------------------------------------------------------------------------------------------
+ use Databse for Project
+ 
+ use CourseMonitoringSystem;
+ 
+ 
+------------------------------------------------------------------------------------------------------------------------
+Tables:
+==========================================================================================================================
+ Create Table
+
+	Admin:
+	•	username
+	•	password
+
+
+ create table Admin(username varchar(25) primary key, password varchar(20) NOT NULL);
+ 
+ -------------------------------------------------------------------------------------------------------------------------
+ 
+	Faculty:
+	•	facultyid
+	•	facultyname
+	•	facultyaddress
+	•	mobile
+	•	email 
+	•	username
+	•	password
+
+
+create table Faculty(facultyid int primary key auto_increment, facultyname varchar(20) NOT NULL, facultyaddress varchar(25) NOT NULL, mobile varchar(10) NOT NULL, email varchar(25) NOT NULL UNIQUE, username varchar(25) NOT NULL UNIQUE,password varchar(20) NOT NULL);
+ 
+ 
+ alter table Faculty auto_increment=1001;
+
+------------------------------------------------------------------------------------------------------------------------------
+
+	Course:
+	•	courseid
+	•	courseName
+	•	fee
+	•	courseDescription
+
+
+create table Course(courseid int primary key, courseName varchar(15) NOT NULL UNIQUE, fee int NOT NULL,courseDescription varchar(60) NOT NULL);
+
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
+Batch:
+•	batchId:
+•	courseId:
+•	facultyId:
+•	numberofStudents;
+•	batchstartDate
+•	duration 
+
+
+create table Batch(batchId int primary key, courseId int, facultyId int, numberofStudents int NOT NULL, batchstartDate Date NOT NULL, duration varchar(12) NOT NULL, FOREIGN KEY (courseId) REFERENCES Course(courseid), FOREIGN KEY(facultyId) REFERENCES Faculty(facultyid));
+ 
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
+
+CoursePlan:
+•	planId
+•	batchId
+•	dayNumber
+•	topic
+•	status: completed/pending
+
+
+create table CoursePlan(planId int primary key, batchId int, dayNumber int NOT NULL, topic varchar(20) NOT NULL, status varchar(10) NOT NULL, FOREIGN KEY (batchId) REFERENCES Batch(batchId));
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
+insert into Admin values ('gautamprajapat8','123');
+insert into Admin values ('admin','password');
 
 
 
 
 
 
+select b.batchId, b.facultyId, b.numberofStudents, b.batchstartDate, b.duration, c.courseid, c.courseName, c.fee, c.courseDescription from Batch b INNER join Course c ON b.courseId=c.courseid;
+
+
+
+
+
+•	View the Day wise update of every batch.
+
+select b.batchId, c.courseName,courseDescription, f.facultyname, cp.dayNumber, cp.topic from Batch b INNER join Course c ON b.courseId=c.courseid INNER join faculty f on f.facultyid=b.facultyid INNER join courseplan cp ON cp.batchId=b.batchId order by b.batchId, cp.dayNumber;
+
+
+
+
+•	Generate Report for every batch.
+
+select b.batchId, c.courseName, c.courseDescription,f.facultyname , b.numberofStudents, b.batchstartDate, b.duration,cp.status from Batch b INNER join Course c ON b.courseId=c.courseid INNER join faculty f on f.facultyid=b.facultyid INNER join courseplan cp on cp.batchId =b.batchId group by batchId;
+
+
+# About
+in this project totle six package
+
+- com.masai.bean 
+
+	-in this package have eight bean class are avalable
+	
+	
+- com.masai.dao 
+
+	-in this package two interface and two class avalable for DAO(DATA ACCESS OBJECT)
+
+- com.masai.exceptions
+- 
+	-in this package written All types of Exception which might occur during run time
+
+
+- com.masai.Main
+
+	-in this package writeen Main class with main method to run this program
+	
+	
+- com.masai.UseCase
+
+	-in this package writeen to Class with mulltiple method for Run program
+
+- com.masai.utility
+
+	-in this package writen one Class DSUtill fro make connection with database
+	
+
+
+
+
+Thank You to visit our project
