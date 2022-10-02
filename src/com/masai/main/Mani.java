@@ -1,13 +1,10 @@
 package com.masai.main;
 
 import java.util.Scanner;
-
-import com.masai.bean.CoursePlan;
-import com.masai.bean.Faculty;
-import com.masai.dao.FacultyDaoImp;
-import com.masai.dao.FacultyDaoIntr;
-import com.masai.exceptions.CoursePlanException;
-import com.masai.exceptions.FacultyException;
+import com.masai.bean.*;
+import com.masai.dao.*;
+import com.masai.exceptions.*;
+import com.masai.UseCase.*;
 
 public class Mani {
 
@@ -18,7 +15,8 @@ public class Mani {
 		boolean start=true;
 		while(start)
 		{
-			System.out.println("Please select type of user:-");
+			System.out.println("\n\n**** Welocome to Course Monitoring System ****");
+			System.out.println("Please select an option to continue:-");
 			System.out.println("1. Administrator");
 			System.out.println("2. Faculty");
 			System.out.println("3. Exit");
@@ -27,8 +25,154 @@ public class Mani {
 			switch(startMenu)
 			{
 				case 1://Administrator
+					// login
+					System.out.println("-------------------------------------------------");
+					System.out.println("Enter User name:");
+					String auname=sc.nextLine();
+					System.out.println("Enter Passwors:");
+					String apass=sc.nextLine();
+					Admin ad=new Admin(auname, apass);
+					Admin a=null;
 					
-					System.out.println("Hello Admin");
+					AdminDaoIntr adi=new AdminDaoImp();
+					
+				try {
+					a=adi.login(ad);
+					
+					if(a!=null)
+					{
+						System.out.println();
+						System.out.println("**Hello "+a.getUsername()+"....**");
+						boolean Y=true;
+						while(Y)
+						{
+							System.out.println("________________________________________________");
+							System.out.println("Please select an option to continue:-");
+							System.out.println("11. Create Course:");
+							System.out.println("12. Update Course:");
+							System.out.println("13. View All Course:");
+							
+							System.out.println("21. Create Batch:");
+							System.out.println("22. Update Batch:");
+							System.out.println("23. View All Batch With Course:");
+							
+							System.out.println("31. Create Faculty:");
+							System.out.println("32. Update Faculty:");
+							System.out.println("33. View All Faculty:");
+							
+							System.out.println("41. Allocate faculty to a batch:");
+							System.out.println("42. Allocate course to a batch:");
+							
+							System.out.println("51. Create Course plan:");
+							System.out.println("52. Update Course plan:");
+							System.out.println("53. View All Course plan:");
+							
+							System.out.println("60. View the Day wise update of every batch:");
+							
+							System.out.println("70. Generate Report for every batch:");
+							
+							System.out.println("04. Exit");
+							System.out.println("Pleas enter your option:-");
+							int aopt=sc.nextInt();
+							switch(aopt)
+							{
+								case 11://Create Course
+									AdminAllMethod.CreateCourse();
+									
+									break;
+								case 12://Update Course
+									AdminAllMethod.UpdateCourse();
+									
+									break;
+								case 13://View All Course
+									AdminAllMethod.ViewAllCourse();
+									
+									
+									
+									break;
+								case 21://Create Batch
+									AdminAllMethod.CreateBatch();
+									
+									break;
+								case 22://Update Batch
+									AdminAllMethod.UpdateBatch();
+									
+									break;
+								case 23://View All Batch With Course
+									AdminAllMethod.ViewAllBatchWithCourse();
+									
+									
+									
+									break;
+								case 31://Create Faculty
+									AdminAllMethod.CreateFaculty();
+									
+									break;
+								case 32://Update Faculty
+									AdminAllMethod.UpdateFaculty();
+									
+									break;
+								case 33://View All Faculty
+									AdminAllMethod.ViewAllFaculty();
+									
+									
+									break;
+								case 41://Allocate faculty to a batch
+									AdminAllMethod.allocateFacultyToBatch();
+									
+									break;
+									
+								case 42://Allocate course to a batch
+									AdminAllMethod.allocateCourseToBatch();
+									
+									break;
+									
+									
+								case 51://Create Course plan
+									AdminAllMethod.CreateCoursePlan();
+									
+									break;
+								case 52://Update Course plan
+									AdminAllMethod.UpdateCoursePlan();
+									
+									break;
+								case 53://View All Course plan
+									AdminAllMethod.ViewAllCoursePlan();
+									
+									break;
+									
+								case 60://View the Day wise update of every batch
+									AdminAllMethod.ViewTheDayWiseUpdateOfEveryBatch();
+									
+									break;
+								
+								case 70://Generate Report for every batch
+									AdminAllMethod.GenerateReportForEveryBatch();
+									
+									break;
+								
+								case 4:
+									Y=false;
+									break;
+								default:
+									System.out.println("Please select a valid option...!");
+							
+							}
+							
+						}
+					}
+					
+					
+					
+					
+				} catch (AdminException e1) {
+					
+					System.out.println(e1.getMessage());
+				}
+					
+					
+					
+					
 					break;
 					
 				case 2: //Faculty
@@ -38,7 +182,6 @@ public class Mani {
 					String uname=sc.nextLine();
 					System.out.println("Enter Passwors:");
 					String pass=sc.nextLine();
-					
 					Faculty f=null;
 					
 					FacultyDaoIntr fdi= new FacultyDaoImp();
@@ -47,12 +190,13 @@ public class Mani {
 						f=fdi.login(uname, pass);
 						if(f!=null)
 						{
-							System.out.println("------------------------------------");
-							System.out.println("Hello "+f.getFacultyname()+"....");
+							System.out.println();
+							System.out.println("** Hello "+f.getFacultyname()+"....**");
 							boolean x=true;
 							while(x)
 							{
-								System.out.println("\nPlease select menu:-");
+								System.out.println("________________________________________________");
+								System.out.println("\nPlease select an option to continue:-");
 								System.out.println("1. View the Course Plan By ID");
 								System.out.println("2. Fill up the day wise planner");
 								System.out.println("3. Update Your password");
@@ -61,21 +205,21 @@ public class Mani {
 								switch(fopt)
 								{
 									case 1://View the Course Plan By ID
-										viewCoursp();
+										FacultyAllMethod.viewCoursp();
 										break;
 									
 									case 2://Fill up the day wise planner
-										fillup();
+										FacultyAllMethod.fillup();
 										break;
 										
 									case 3:// update password
-										upassword(uname);
+										FacultyAllMethod.upassword(uname);
 										break;
 									case 4:
 										x=false;
 										break;
 									default:
-										System.out.println("Please enter valid option");
+										System.out.println("Please select a valid option......");
 								}
 							}
 						}
@@ -93,80 +237,43 @@ public class Mani {
 					break;
 					
 				default:
-					System.out.println("Please Enter valid Option");
+					System.out.println("Please select a valid option...!");
 			}
 		}
 	}
 	
 	
 	
-	public static void viewCoursp()
-	{
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter Course plan Id:");
-		int id=sc.nextInt();
-		CoursePlan c=null;
-		FacultyDaoIntr fdi= new FacultyDaoImp();
-		try {
-			c=fdi.viewCoursePlan(id);
-			System.out.println("==========================================\n");
-			System.out.println("Course Plan Id: "+c.getPlanId());
-			System.out.println("Course Batch Id: "+c.getBatchId());
-			System.out.println("Course Day Number: "+c.getDayNumber());
-			System.out.println("Course Topic: "+c.getTopic());
-			System.out.println("Course Status: "+c.getStatus());
-			System.out.println("==========================================\n");
-			
-		} catch (CoursePlanException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		}
-	}
-	public static void fillup()
-	{
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter Course Plane ID:");
-		int id=sc.nextInt();
-		sc.nextLine();
-		System.out.println("Enter Batch Id:");
-		int bid=sc.nextInt();
-
-		System.out.println("Enter Day Number:");
-		int dayNumber=sc.nextInt();
-		sc.nextLine();
-		System.out.println("Enter Course plane Topic:");
-		String topic=sc.nextLine();
-		System.out.println("Enter Course plane Status(completed/pending):");
-		String status=sc.nextLine();
-		
-		CoursePlan cp=new CoursePlan(id, bid, dayNumber, topic, status);
-		
-		FacultyDaoIntr fdi= new FacultyDaoImp();
-		
-		String msg=fdi.fillCoursePlan(cp);
-		System.out.println(msg);
-	}
 	
-	public static void upassword(String uname)
-	{
-		Scanner sc=new Scanner(System.in);
+	
+	
+	
+//	public static void main(String[] args)
+//	{
+//		CreateCourse();
+//		UpdateCourse();
+//		ViewAllCourse();
+//		CreateBatch();
+//		UpdateBatch();
+//		ViewAllBatchWithCourse();
+//		CreateFaculty();
+//		UpdateFaculty();
+//		ViewAllFaculty();
+//		allocateFacultyToBatch();
+//		CreateCoursePlan();
+//		UpdateCoursePlan();
+//		ViewAllCoursePlan();
+//		ViewTheDayWiseUpdateOfEveryBatch();
+//		GenerateReportForEveryBatch();
+//	}
+	
 
-		System.out.println("Enter new Passwors:");
-		String pass=sc.nextLine();
-		System.out.println("Enter again new Passwors:");
-		String apass=sc.nextLine();
-		
-		FacultyDaoIntr fdi= new FacultyDaoImp();
-		if(apass.equals(pass))
-		{
-			String mess=fdi.updatePassword(uname, pass);
-			System.out.println(mess);
-		}
-		else
-		{
-			System.out.println("Both Password Must be same...\n");
-			upassword(uname);
-		}
-	}
+	
+	
+
+
+
+
+
 
 }

@@ -43,7 +43,7 @@ public class FacultyDaoImp implements FacultyDaoIntr{
 				faculty=new Faculty(facultyid, facultyname, facultyaddress, mobile, email, usernam, passwor);
 			}
 			else
-					throw new FacultyException("Invalid Username or password...");
+					throw new FacultyException("Invalid Username or password......!");
 			
 		}
 		catch (SQLException e)
@@ -82,7 +82,7 @@ public class FacultyDaoImp implements FacultyDaoIntr{
 			}
 			else
 			{
-				throw new CoursePlanException("Course ID dose not Available...");
+				throw new CoursePlanException("Course ID dose not Available......!");
 			}
 			
 		}catch(SQLException e)
@@ -98,23 +98,23 @@ public class FacultyDaoImp implements FacultyDaoIntr{
 	
 	@Override
 	public String fillCoursePlan(CoursePlan coursePlan){
-		String msg="Course Plan not fillup....";
+		String msg="Course Plan not fillup......!";
 		try(Connection conn=DBUtil.ProvideConnection())
 		{
-			PreparedStatement ps=conn.prepareStatement("insert into CoursePlan(planId,batchId,dayNumber,topic,status) values(?,?,?,?,?)");
+			PreparedStatement ps=conn.prepareStatement("UPDATE coursePlan SET batchId=?,dayNumber=?,topic=?,status=? where planId=?");
 
-			ps.setInt(1, coursePlan.getPlanId());
-			ps.setInt(2, coursePlan.getBatchId());
-			ps.setInt(3, coursePlan.getDayNumber());
-			ps.setString(4, coursePlan.getTopic());
-			ps.setString(5, coursePlan.getStatus());
 			
+			ps.setInt(1, coursePlan.getBatchId());
+			ps.setInt(2, coursePlan.getDayNumber());
+			ps.setString(3, coursePlan.getTopic());
+			ps.setString(4, coursePlan.getStatus());
+			ps.setInt(5, coursePlan.getPlanId());
 			
 			int x=ps.executeUpdate();
 			
 			if(x>0)
 			{
-				msg = "Course Plan fill uped Sucessfully !";
+				msg = "Course Plan fill uped Sucessfully......";
 			}
 			
 		}catch(SQLException e)
@@ -130,7 +130,7 @@ public class FacultyDaoImp implements FacultyDaoIntr{
 	@Override
 	public String updatePassword(String username, String password) {
 		
-		String msg="PassWord not updated....";
+		String msg="PassWord not updated......!";
 		try(Connection conn=DBUtil.ProvideConnection())
 		{
 			PreparedStatement ps=conn.prepareStatement("UPDATE Faculty SET password =? WHERE username=? ");
@@ -142,7 +142,7 @@ public class FacultyDaoImp implements FacultyDaoIntr{
 			
 			if(x>0)
 			{
-				msg = "\nYour PassWord is updated Sucessfully!";
+				msg = "\nYour PassWord is updated Sucessfully......";
 			}
 			
 		}catch(SQLException e)

@@ -32,13 +32,10 @@ Tables:
 	•	password
 
 
-create table Faculty(facultyid int primary key, facultyname varchar(20) NOT NULL, facultyaddress varchar(25) NOT NULL, mobile varchar(10) NOT NULL, email varchar(25) NOT NULL UNIQUE, username varchar(25) NOT NULL UNIQUE,password varchar(20) NOT NULL);
+create table Faculty(facultyid int primary key auto_increment, facultyname varchar(20) NOT NULL, facultyaddress varchar(25) NOT NULL, mobile varchar(10) NOT NULL, email varchar(25) NOT NULL UNIQUE, username varchar(25) NOT NULL UNIQUE,password varchar(20) NOT NULL);
  
  
  alter table Faculty auto_increment=1001;
-
-
-
 
 ------------------------------------------------------------------------------------------------------------------------------
 
@@ -49,7 +46,7 @@ create table Faculty(facultyid int primary key, facultyname varchar(20) NOT NULL
 	•	courseDescription
 
 
-create table Course(courseid int primary key, courseName varchar(15) NOT NULL UNIQUE, fee int NOT NULL,courseDescription varchar(30) NOT NULL);
+create table Course(courseid int primary key, courseName varchar(15) NOT NULL UNIQUE, fee int NOT NULL,courseDescription varchar(60) NOT NULL);
 
 
 
@@ -110,6 +107,8 @@ insert into Course values(103,'Full Stack',40000,'You learn All concept of Front
 insert into Batch values(011,101,1001,280,'2022-09-10', '3 Month');
 insert into Batch values(012,102,1002,310,'2022-08-02', '3 Month');
 insert into Batch values(013,103,1003,310,'2020-08-02', '6 Month');
+insert into Batch values(014,103,1003,110,'2025-08-12', '1 Month');
+insert into Batch values(015,null,null,200,'2028-08-22', '4 Month');
 
 
 insert into CoursePlan values (01,011,03,'Exception Handling','pending');
@@ -119,3 +118,56 @@ insert into CoursePlan values (02,012,05,'Disigning','completed');
 
 
 UPDATE Faculty SET password = '1234' WHERE facultyid=1001 and username='ratan123';
+
+
+UPDATE Course SET courseName= 'BhagwadGeeta', fee=00, courseDescription='You learnd about World'  WHERE courseid=103;
+
+
+
+
+
+select b.batchId, b.facultyId, b.numberofStudents, b.batchstartDate, b.duration, c.courseid, c.courseName, c.fee, c.courseDescription from Batch b INNER join Course c ON b.courseId=c.courseid;
+
+
+
+
+ALTER TABLE Course MODIFY COLUMN column_name1 data_type, MODIFY COLUMN column_name2 data_type ... ;  
+
+
+ALTER TABLE course MODIFY COLUMN courseDescription varchar(100) NOT NULL;
+
+
+
+
+UPDATE Batch SET courseId = null WHERE batchid=11;
+
+
+
+•	View the Day wise update of every batch.
+
+select b.batchId, c.courseName,courseDescription, f.facultyname, cp.dayNumber, cp.topic from Batch b INNER join Course c ON b.courseId=c.courseid INNER join faculty f on f.facultyid=b.facultyid INNER join courseplan cp ON cp.batchId=b.batchId order by b.batchId, cp.dayNumber;
+
+
+
+
+
+
+•	Generate Report for every batch.
+
+
+
+
+select b.batchId, c.courseName, c.courseDescription,f.facultyname , b.numberofStudents, b.batchstartDate, b.duration,cp.dayNumber,cp.topic,cp.status from Batch b INNER join Course c ON b.courseId=c.courseid INNER join faculty f on f.facultyid=b.facultyid INNER join courseplan cp on cp.batchId =b.batchId;
+
+
+
+select b.batchId, c.courseName, c.courseDescription,f.facultyname , b.numberofStudents, b.batchstartDate, b.duration,cp.status from Batch b INNER join Course c ON b.courseId=c.courseid INNER join faculty f on f.facultyid=b.facultyid INNER join courseplan cp on cp.batchId =b.batchId group by batchId;
+
+
+select status from courseplan group by batchId;
+
+
+
+
+DELETE FROM table_name WHERE condition;
+DELETE FROM course WHERE courseid=107;
