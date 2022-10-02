@@ -43,12 +43,14 @@ After understanding the basic of JAVA & MySQL and JDBC, I just try to build the 
 								Course Monitoring System
 
 # Types of users:
+
 •	Administrator
 
 •	Faculty
 
 
 # Role of Administrator:
+
 •	Login to his account
 
 •	 Create, Update, View Course.
@@ -58,6 +60,8 @@ After understanding the basic of JAVA & MySQL and JDBC, I just try to build the 
 •	Create, Update, View Faculty.
 
 •	Allocate faculty to a batch.
+
+•	Allocate Course to a batch.
 
 •	Create, Update, View Course plan.
 
@@ -99,7 +103,7 @@ After understanding the basic of JAVA & MySQL and JDBC, I just try to build the 
 
 •	mobile
 
-•	email 
+•	email
 
 •	username
 
@@ -145,8 +149,7 @@ After understanding the basic of JAVA & MySQL and JDBC, I just try to build the 
 •	status: completed/pending
 
 
-# Some basic MySQL santax used By me in the project
-
+# some Important SQL syntax used By me in this project
 
 
 create data Base
@@ -191,6 +194,7 @@ create table Faculty(facultyid int primary key auto_increment, facultyname varch
 ------------------------------------------------------------------------------------------------------------------------------
 
 	Course:
+	
 	•	courseid
 	•	courseName
 	•	fee
@@ -204,13 +208,14 @@ create table Course(courseid int primary key, courseName varchar(15) NOT NULL UN
 ------------------------------------------------------------------------------------------------------------------------------
 
 
-Batch:
-•	batchId:
-•	courseId:
-•	facultyId:
-•	numberofStudents;
-•	batchstartDate
-•	duration 
+	Batch:
+
+	•	batchId:
+	•	courseId:
+	•	facultyId:
+	•	numberofStudents;
+	•	batchstartDate
+	•	duration 
 
 
 create table Batch(batchId int primary key, courseId int, facultyId int, numberofStudents int NOT NULL, batchstartDate Date NOT NULL, duration varchar(12) NOT NULL, FOREIGN KEY (courseId) REFERENCES Course(courseid), FOREIGN KEY(facultyId) REFERENCES Faculty(facultyid));
@@ -223,12 +228,13 @@ create table Batch(batchId int primary key, courseId int, facultyId int, numbero
 
 
 
-CoursePlan:
-•	planId
-•	batchId
-•	dayNumber
-•	topic
-•	status: completed/pending
+	CoursePlan:
+	
+	•	planId
+	•	batchId
+	•	dayNumber
+	•	topic
+	•	status: completed/pending
 
 
 create table CoursePlan(planId int primary key, batchId int, dayNumber int NOT NULL, topic varchar(20) NOT NULL, status varchar(10) NOT NULL, FOREIGN KEY (batchId) REFERENCES Batch(batchId));
