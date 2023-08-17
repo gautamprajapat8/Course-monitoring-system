@@ -15,11 +15,17 @@ public class Mani {
 		boolean start=true;
 		while(start)
 		{
-			System.out.println("\n\n**** Welocome to Course Monitoring System ****");
-			System.out.println("Please select an option to continue:-");
-			System.out.println("1. Administrator");
-			System.out.println("2. Faculty");
-			System.out.println("3. Exit");
+			System.out.println("\n\n");
+			System.out.println("     ***************************************************");
+			System.out.println("     *                                                 *");
+			System.out.println("     *----- Welocome to Course Monitoring System ------*");
+			System.out.println("     *                                                 *");
+			System.out.println("     *      Please select an option to continue:-      *");
+			System.out.println("     *      1. Administrator                           *");
+			System.out.println("     *      2. Faculty                                 *");
+			System.out.println("     *      3. Exit                                    *");
+			System.out.println("     *                                                 *");
+			System.out.println("     ***************************************************");
 			int startMenu=sc.nextInt();
 			sc.nextLine();
 			switch(startMenu)
@@ -29,7 +35,7 @@ public class Mani {
 					System.out.println("-------------------------------------------------");
 					System.out.println("Enter User name:");
 					String auname=sc.nextLine();
-					System.out.println("Enter Passwors:");
+					System.out.println("Enter Password:");
 					String apass=sc.nextLine();
 					Admin ad=new Admin(auname, apass);
 					Admin a=null;

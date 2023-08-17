@@ -270,7 +270,7 @@ select b.batchId, c.courseName, c.courseDescription,f.facultyname , b.numberofSt
 
 
 # About
-in this project totle six package
+There are total six packages in this project
 
 - com.masai.bean 
 

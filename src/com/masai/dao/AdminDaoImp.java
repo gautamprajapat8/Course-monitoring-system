@@ -55,8 +55,6 @@ public class AdminDaoImp implements AdminDaoIntr{
 			ps.setInt(3, course.getFee());
 			ps.setString(4, course.getCourseDescription());
 			
-			
-			
 			int x=ps.executeUpdate();
 			
 			if(x>0)

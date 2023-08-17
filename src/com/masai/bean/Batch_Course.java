@@ -7,7 +7,6 @@ public class Batch_Course {
 	private int numberofStudents;
 	private String batchstartDate;
 	private String duration;
-	
 	private int courseid;
 	private String courseName;
 	private int fee;
